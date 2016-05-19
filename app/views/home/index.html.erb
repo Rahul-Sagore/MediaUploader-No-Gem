@@ -44,6 +44,7 @@
 				</div>
 				<div class="col col-3">
 					<% if @current_user[:role] != 'admin' %>
+						<%= link_to "Download", "/images/uploads/"+ medium.user_id.to_s + "/" + medium.filename %> |
 						<%= link_to 'Delete', medium, :confirm => 'Are you sure?', :method => :delete %>
 					<% end %>
 					<% if @current_user[:role] == 'admin' %>

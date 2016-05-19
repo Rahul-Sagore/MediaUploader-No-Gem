@@ -7,8 +7,8 @@ class SessionsController < ApplicationController
   def login
   	@user_info = params[:session]
 
-  	@user = User.find_by_email(params[:session][:email])
-  	password = Digest::SHA1.hexdigest(params[:session][:password])
+  	@user = User.find_by_email(@user_info[:email])
+  	password = Digest::SHA1.hexdigest(@user_info[:password])
 
 	  if @user && @user[:password] == password
 	    session[:user_id] = @user.id

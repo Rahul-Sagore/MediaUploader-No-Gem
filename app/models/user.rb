@@ -7,6 +7,10 @@ class User < ActiveRecord::Base
 	before_save :encrypt_password
 	after_save :clear_password
 
+	EMAIL_REGEX = /^.+@.+$/i
+	# validates :email, :presence => true, :uniqueness => true, :format => EMAIL_REGEX
+
+
 	def encrypt_password
 		self.password = Digest::SHA1.hexdigest(password)
 	end
