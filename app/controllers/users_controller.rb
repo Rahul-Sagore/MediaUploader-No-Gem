@@ -16,6 +16,7 @@ class UsersController < ApplicationController
   		if @new_user.save
   			session[:user_id] = @new_user.id
   			system 'mkdir', '-p', Rails.root.join('public', 'images/uploads/', session[:user_id].to_s)
+        flash[:success] = "Welcome to the Media Uploader. World's #1 Online Drive!"
   		end
   	end
 
