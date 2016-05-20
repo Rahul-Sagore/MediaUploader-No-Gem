@@ -14,7 +14,7 @@
 		<span class="logout">
 			<%= link_to 'Logout', logout_path, :method => :delete %>
 			(<%= @current_user.email %>
-			<%= @current_user.role.upcase %>)
+			<%= @current_user.role.upcase %>-<%= session[:user_id]%>)
 		</span>
 	<% end %>
 </h1>
