@@ -12,6 +12,7 @@ MediaUploader::Application.routes.draw do
   root :to => "home#index"
 
   post "upload" => "home#upload"
+  get "download" => "home#download"
 
   get "signup" => "users#new"
   post "create_user" => "users#create_user"

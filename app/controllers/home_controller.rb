@@ -72,4 +72,9 @@ class HomeController < ApplicationController
 		end
 	end
 
+	def download
+		@media = Medium.find_by_id(params[:media])
+		send_file Rails.root.join('public', 'images/uploads/', session[:user_id].to_s, @media.filename), :x_sendfile=>true
+	end
+
 end
