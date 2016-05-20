@@ -7,8 +7,8 @@ class User < ActiveRecord::Base
 	before_save :encrypt_password
 	after_save :clear_password
 
-	EMAIL_REGEX = /^.+@.+$/i
-	# validates :email, :presence => true, :uniqueness => true, :format => EMAIL_REGEX
+	validates :email, :presence => true, :uniqueness => true
+	validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
 
 
 	def encrypt_password
