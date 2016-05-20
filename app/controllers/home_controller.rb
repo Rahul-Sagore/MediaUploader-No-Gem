@@ -48,7 +48,7 @@ class HomeController < ApplicationController
 		isFileExist = Medium.where(:user_id => session[:user_id], :filename => filename)
 
 		if isFileExist.size > 0
-			moreFileExist = Medium.where(["filename LIKE ?", "%#{fName}_copy%"]).where(:user_id => 1)
+			moreFileExist = Medium.where(["filename LIKE ?", "%#{fName}_copy%"]).where(:user_id => session[:user_id])
 			if moreFileExist.size > 0
 				lastEntry = moreFileExist[-1].filename
 			else
@@ -74,7 +74,12 @@ class HomeController < ApplicationController
 
 	def download
 		@media = Medium.find_by_id(params[:media])
-		send_file Rails.root.join('public', 'images/uploads/', session[:user_id].to_s, @media.filename), :x_sendfile=>true
+		begin
+			send_file Rails.root.join('public', 'images/uploads/', session[:user_id].to_s, @media.filename), :x_sendfile=>true
+		rescue
+			flash[:error] = "File Not Available to download"
+			redirect_to :action => "index"
+		end
 	end
 
 end
