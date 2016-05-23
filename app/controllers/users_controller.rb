@@ -12,9 +12,6 @@ class UsersController < ApplicationController
   	if @new_user.email != "" && !@new_user.password != ""
   		@new_user[:role] = "user" if @new_user.role.nil?
   		if @new_user.save
-  			session[:user_id] = @new_user.id
-        puts "VOila"
-  			system 'mkdir', '-p', Rails.root.join('public', 'images/uploads/', session[:user_id].to_s)
         flash[:success] = "Welcome to the Media Uploader. World's #1 Online Drive!"
         redirect_to "/"
       else
